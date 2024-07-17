@@ -3,10 +3,8 @@ package com.example.demo;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -20,8 +18,16 @@ import java.util.stream.Collectors;
 public class CsvController {
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/download-csv")
-    public ResponseEntity<byte[]> downloadCSV() throws IOException {
+    @PostMapping("/download-csv")
+    public ResponseEntity<byte[]> downloadCSV(
+            @RequestParam("selectedMonth") String selectedMonth,
+            @RequestParam("selectedFile") String selectedFile) throws IOException {
+
+        // Process the selected month and file as needed
+        System.out.println("Selected Month: " + selectedMonth);
+        System.out.println("Selected File: " + selectedFile);
+
+        // Dummy data for CSV generation
         List<String[]> data = Arrays.asList(
                 new String[] { "Name", "Age", "City" },
                 new String[] { "Alice", "30", "New York" },
